@@ -7,29 +7,40 @@
   <body>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/script.js/2.5.9/script.min.js" integrity="sha512-nQUxc8VAJRo3Q01idWkxWJADjVoRenyGNrUy6+ighjjZg/obzeII29QiMMVfYpCEVQyFyWEiOEw4uhJqX9/J6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script type="text/javascript">
+      let finalScript;
+      let callback;
+
       function $script(arr, cb) {
-        let count = 1;
+        callback = cb;
 
         arr.forEach(item => {
           const script = document.createElement('script');
           script.src = item;
           script.setAttribute('async', '');
-
-          script.onload = () => {
-            if (count === arr.length) {
-              cb();
-            }
-
-            count++;
+          finalScript = script;
+          if (typeof cb === 'function') {
+            handleOnload(cb);
           }
 
           document.head.append(script);
-        })
+        });
+      }
+
+      function handleOnload(cb) {
+        finalScript.onload = () => {
+          cb();
+        }
+      }
+
+      $script.ready = (name, cb) => {
+        handleOnload(cb);
       }
     </script>
     <script type="text/javascript">
-      $script(['foo.js', 'bar.js', 'test.js'], function () {
-        // foo.js & bar.js & test.js are ready
+      $script(['foo.js', 'bar.js', 'test.js'], 'bundle');
+
+      $script.ready('bundle', function() {
+        // use your plugin :)
         console.log(123);
       });
     </script>
