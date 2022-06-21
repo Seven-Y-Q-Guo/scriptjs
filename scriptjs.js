@@ -1,5 +1,6 @@
 let finalScript;
 let callback;
+let evets = {};
 
 function $script(arr, cb) {
   callback = cb;
@@ -9,22 +10,21 @@ function $script(arr, cb) {
     script.src = item;
     script.setAttribute('async', '');
     finalScript = script;
-    if (typeof cb === 'function') {
-      handleOnload(cb);
+
+    script.onload = () => {
+      if (typeof cb === 'function') {
+        cb()
+      } else {
+        evets[cb]();
+      }
     }
 
     document.head.append(script);
   });
 }
 
-function handleOnload(cb) {
-  finalScript.onload = () => {
-    cb();
-  }
-}
-
 $script.ready = (name, cb) => {
-  handleOnload(cb);
+  evets[name] = cb;
 
   return $script;
 }

@@ -5,8 +5,8 @@
     <title></title>
   </head>
   <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/script.js/2.5.9/script.min.js" integrity="sha512-nQUxc8VAJRo3Q01idWkxWJADjVoRenyGNrUy6+ighjjZg/obzeII29QiMMVfYpCEVQyFyWEiOEw4uhJqX9/J6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../scriptjs.js" charset="utf-8"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/script.js/2.5.9/script.min.js" integrity="sha512-nQUxc8VAJRo3Q01idWkxWJADjVoRenyGNrUy6+ighjjZg/obzeII29QiMMVfYpCEVQyFyWEiOEw4uhJqX9/J6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="../scriptjs.js" charset="utf-8"></script>
     <script type="text/javascript">
       // $script(['foo.js', 'bar.js', 'test.js'], 'bundle');
       //
@@ -20,9 +20,7 @@
       $script
         .ready('foo', function() {
           // foo.js is ready
-          setTimeout(() => {
-            console.log(1);
-          }, 1000)
+          console.log(1);
         })
         .ready('bar', function() {
           // bar.js is ready
