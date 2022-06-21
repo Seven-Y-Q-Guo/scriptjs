@@ -1,6 +1,7 @@
 let finalScript;
 let callback;
 let evets = {};
+let count = 1;
 
 function $script(arr, cb) {
   callback = cb;
@@ -15,7 +16,14 @@ function $script(arr, cb) {
       if (typeof cb === 'function') {
         cb()
       } else {
-        evets[cb]();
+        if (typeof arr === 'string') {
+          evets[cb]();
+        } else {
+          if (arr.length === count) {
+            evets[cb]();
+          }
+          count++;
+        }
       }
     }
 
