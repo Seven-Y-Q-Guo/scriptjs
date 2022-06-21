@@ -4,7 +4,7 @@ let callback;
 function $script(arr, cb) {
   callback = cb;
 
-  arr.forEach(item => {
+  (typeof arr === 'string' ? [arr] : arr).forEach(item => {
     const script = document.createElement('script');
     script.src = item;
     script.setAttribute('async', '');
