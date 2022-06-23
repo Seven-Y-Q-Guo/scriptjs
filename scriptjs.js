@@ -36,3 +36,5 @@ $script.ready = (name, cb) => {
 
   return $script;
 }
+
+module.exports = $script
